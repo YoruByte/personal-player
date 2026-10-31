@@ -50,7 +50,10 @@ use innertube::SongItem;
 
 /// Optional Discord application id supplied by the personal build environment. An empty value
 /// disables Rich Presence; this personal build must not use the upstream developer's Discord app.
-const APP_ID: &str = option_env!("PERSONAL_PLAYER_DISCORD_APP_ID").unwrap_or("");
+const APP_ID: &str = match option_env!("PERSONAL_PLAYER_DISCORD_APP_ID") {
+	Some(value) => value,
+	None => "",
+};
 
 const SONG_URL: &str = "https://music.youtube.com/watch?v=";
 const ARTIST_URL: &str = "https://music.youtube.com/channel/";
